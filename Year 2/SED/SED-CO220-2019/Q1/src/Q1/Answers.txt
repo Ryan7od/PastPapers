@@ -1,0 +1,27 @@
+a)
+i -
+    Phonecall is dependant on 2 instances of LocalTime to calculate duration.
+ii -
+    Phonecall is dependant the BillingSystem for the charge method
+iii -
+    For number 1, if the constructor changes, we can't use LocalTimeOf, and if
+    the response changes, the customer may be charged 1000x rate (if it goes from
+    seconds to ms for example)
+
+    For number 2, phonecall is completely dependent. If BillingSystem stops working,
+    or the interface / constructor is changed, the customer will not be charged at all.
+
+
+c)
+    The idea was first of all to expose the constants of peak/off peak rate and
+    the start and end peak times, so that we could verify that it was correct
+    without using magic numbers in our tests. We then added a counter inside the
+    PhoneCall class called totalCharge, which would count the charge acrued across
+    all charges. This could have been lastCharge but totalChrge makes more sense
+    for further testing. I wanted to make charge() return an int, but this would
+    have changed its signature therefore not been allowed. I then exposed this totalCharge
+    counter. In order to control the tests being in/out of peak times, I had to
+    overload start() and end() to take a time, which I then gave in the tests, charging
+    and verifying that the cost was the peak/off peak rate (exposed by a getter now)
+    multiplied by the time in the call.
+
