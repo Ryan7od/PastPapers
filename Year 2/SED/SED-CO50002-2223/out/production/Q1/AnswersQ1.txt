@@ -1,0 +1,6 @@
+a)
+i-
+    Factory Method
+ii-
+    Singleton Object
+
