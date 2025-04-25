@@ -1,0 +1,8 @@
+a)
+i-
+    We can create multiple different views for the same model and controllers
+ii -
+    You can change the model based on the user, i.e. if a user wants to see different
+    things / kids mode / subscription model.
+iii -
+    Presentation-Action-Control model.
