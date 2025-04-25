@@ -16,6 +16,6 @@ i-
     behaviour to use, and we are able to pass in our test implementation there.
     This is used to help test when refactoring legacy code.
 ii-
-    Sensing is the act of being able to see quiet effects of a program e.g.
+    Sensing is the act of being able to see indirect effects of a program e.g.
     writing to a database or changing a rarely used variable. We may do this
-    using wrappers or our test implementations.
+    using wrappers or mock, and it is used to test and verify programs.

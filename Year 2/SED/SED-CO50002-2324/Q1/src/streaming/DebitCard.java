@@ -5,7 +5,7 @@ public class DebitCard implements PaymentMethod {
         this.name = name;
     }
 
-    private static String name;
+    private final String name;
 
     @Override
     public void charge(double amount) {

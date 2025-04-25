@@ -1,18 +1,16 @@
 package bookings;
 
-import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import static bookings.DateUtils.asDate;
 
-public class YourTest {
+public class BookingsEngineTest {
   @Test
   public void correctlyFiltersCustomerId() {
     BookingsEngine engine = new BookingsEngine(new CustomBookingGenerator());
