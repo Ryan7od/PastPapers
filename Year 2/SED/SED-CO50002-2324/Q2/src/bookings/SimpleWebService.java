@@ -6,6 +6,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 
 public class SimpleWebService {
 
+  // View
   public static void main(String[] args) throws Exception {
 
     Server server = new Server(8888); // Create web server on port 8888

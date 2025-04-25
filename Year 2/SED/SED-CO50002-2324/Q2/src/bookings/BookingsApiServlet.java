@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static bookings.DateUtils.asDate;
 
+// Controller
 public class BookingsApiServlet extends HttpServlet {
 
   // JSON serialization machinery
@@ -41,27 +43,13 @@ public class BookingsApiServlet extends HttpServlet {
     System.out.println("startDate: " + searchStartDate);
     System.out.println("endDate: " + searchEndDate);
 
-    Stream<Booking> bookings = BookingsDatabase.getInstance().getBookings().stream();
-
-    if (customerId != null) {
-
-      bookings = bookings.filter(booking -> booking.customerId().equals(customerId));
-    }
-
-    if (searchStartDate != null) {
-      LocalDate startDate = asDate(searchStartDate);
-      bookings = bookings.filter(booking -> booking.date().isAfter(startDate));
-    }
-
-    if (searchEndDate != null) {
-      LocalDate endDate = asDate(searchEndDate);
-      bookings = bookings.filter(booking -> booking.date().isBefore(endDate));
-    }
+    BookingsEngine engine = new BookingsEngine(new DefaultBookingGenerator());
+    List<Booking> bookings = engine.getBookings(customerId, asDate(searchStartDate), asDate(searchEndDate));
 
     resp.setContentType("application/json");
     resp.setStatus(HttpServletResponse.SC_OK);
 
-    String json = gson.toJson(bookings.toList());
+    String json = gson.toJson(bookings);
     resp.getWriter().println(json);
   }
 

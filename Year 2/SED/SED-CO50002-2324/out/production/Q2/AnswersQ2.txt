@@ -1,6 +1,6 @@
 a)
 i-
-    Template Pattern
+    Decorator Pattern
 ii-
     Singleton Object
 iii-
