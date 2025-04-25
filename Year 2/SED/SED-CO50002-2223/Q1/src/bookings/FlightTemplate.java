@@ -7,8 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 abstract public class FlightTemplate {
-    protected static final int PENCE_PER_MILE = 35;
-    protected static final int STANDARD_FEE_PENCE = 8000;
 
     public FlightTemplate (
             FlightNumber flightNumber, LocalDate date, Airport origin, Airport destination, SeatManagerInterface seatManager) {
@@ -36,8 +34,11 @@ abstract public class FlightTemplate {
     abstract List<Seat> chooseSeat(List<Seat> availableSeats, FrequentFlyerStatus status);
 
     public int calculateFare() {
-        return origin.distanceTo(destination) * PENCE_PER_MILE + STANDARD_FEE_PENCE;
+        return origin.distanceTo(destination) * getPerMileCost() + getStandardFee();
     }
+
+    protected abstract int getPerMileCost();
+    protected abstract int getStandardFee();
 
     @Override
     public String toString() {
