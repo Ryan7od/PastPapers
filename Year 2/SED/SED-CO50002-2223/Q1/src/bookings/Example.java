@@ -13,7 +13,7 @@ public class Example {
 
     EconomyFlight flight =
         new EconomyFlight(
-            FlightNumber.of("BA175"), LocalDate.of(2023, 6, 30), Airport.LHR, Airport.JFK);
+            FlightNumber.of("BA175"), LocalDate.of(2023, 6, 30), Airport.LHR, Airport.JFK, new DefaultSeatManager());
 
     List<Seat> availableSeats = flight.seatingOptions(FrequentFlyerStatus.SILVER);
 
