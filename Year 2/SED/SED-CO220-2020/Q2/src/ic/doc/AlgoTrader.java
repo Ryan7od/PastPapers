@@ -11,18 +11,18 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class AlgoTrader {
+  private final StockPricer stockPricer = new DefualtStockPricer();
+  private final List<String> stocksToWatch =
+      List.of("GOOG", "MSFT", "APPL");
 
-  private final List<TickerSymbol> stocksToWatch =
-      List.of(TickerSymbol.GOOG, TickerSymbol.MSFT, TickerSymbol.APPL);
-
-  private final Map<TickerSymbol, Integer> lastPrices = new HashMap<>();
+  private final Map<String, Integer> lastPrices = new HashMap<>();
   private final SimpleBroker broker = new SimpleBroker();
 
   public void trade() {
 
-    for (TickerSymbol stock : stocksToWatch) {
+    for (String stock : stocksToWatch) {
 
-      StockPrice price = StockMarketDataFeed.getInstance().currentPriceFor(stock);
+      int price = stockPricer.currentPriceFor(stock);
 
       if (isRising(stock, price)) {
         broker.buy(String.valueOf(stock));
@@ -32,18 +32,18 @@ public class AlgoTrader {
         broker.sell(String.valueOf(stock));
       }
 
-      lastPrices.put(stock, price.inPennies());
+      lastPrices.put(stock, price);
     }
   }
 
-  private boolean isFalling(TickerSymbol stock, StockPrice price) {
-    int lastPrice = lastPrices.containsKey(stock) ? lastPrices.get(stock) : 0;
-    return price.inPennies() < lastPrice;
+  private boolean isFalling(String stock, int price) {
+    int lastPrice = lastPrices.getOrDefault(stock, 0);
+    return price < lastPrice;
   }
 
-  private boolean isRising(TickerSymbol stock, StockPrice price) {
-    int lastPrice = lastPrices.containsKey(stock) ? lastPrices.get(stock) : Integer.MAX_VALUE;
-    return price.inPennies() > lastPrice;
+  private boolean isRising(String stock, int price) {
+    int lastPrice = lastPrices.getOrDefault(stock, Integer.MAX_VALUE);
+    return price > lastPrice;
   }
 
   public static void main(String[] args) {

@@ -1,0 +1,8 @@
+a
+    On line 25 we see that we use a singleton of StockMarketDataFeed, causing
+    a high dependence.
+b
+i-
+    We can use the adapter pattern
+ii-
+    This related to dependency inversion
