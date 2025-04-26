@@ -2,7 +2,7 @@ package retail;
 
 import java.math.BigDecimal;
 
-public class CreditCardProcessor {
+public class CreditCardProcessor implements PaymentMethod {
 
   private static final CreditCardProcessor INSTANCE = new CreditCardProcessor();
 

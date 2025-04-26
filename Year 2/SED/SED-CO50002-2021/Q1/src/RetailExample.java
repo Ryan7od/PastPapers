@@ -20,6 +20,7 @@ public class RetailExample {
                 new Product("One Book", new BigDecimal("10.00")),
                 new Product("One Book", new BigDecimal("10.00"))),
             new CreditCardDetails("1234123412341234", 111),
+            new DefaultPaymentMethod(),
             new Address("180 Queens Gate, London, SW7 2AZ"),
             new Address("180 Queens Gate, London, SW7 2AZ"),
             fedex,
@@ -33,6 +34,7 @@ public class RetailExample {
                 new Product("One Book", new BigDecimal("10.00"))
             ),
             new CreditCardDetails("1234123412341234", 111),
+            new DefaultPaymentMethod(),
             new Address("180 Queens Gate, London, SW7 2AZ"),
             new Address("180 Queens Gate, London, SW7 2AZ"),
             royalMail,

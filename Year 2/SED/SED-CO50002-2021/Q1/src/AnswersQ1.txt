@@ -1,0 +1,5 @@
+c
+i-
+    This is a singleton object
+ii-
+    Since it only instantiates a single object, singletons inherently cause dependency
